@@ -1,0 +1,39 @@
+{
+  "cucumberautocomplete.steps": [
+    "cypress/steps/**/*.js",
+  ],
+  "cucumberautocomplete.strictGherkinCompletion": true,
+  "cucumberautocomplete.skipDocStringsFormat": true,
+  "cucumberautocomplete.onTypeFormat": true,
+  "cucumberautocomplete.formatConfOverride": {
+    "Ability": 0,
+    "Funcionalidade": 0,
+    "Business Need": 0,
+    "Regra de Negócio": 0,
+    "Cenario:": 1,
+    "Cenário:": 1,
+    "Background:": 1,
+    "Contexto:": 1,
+    "Esquema do Cenario:": 1,
+    "Esquema do Cenário:": 1,
+    "Exemplos:": 2,
+    "Dado": 2,
+    "E": 2,
+    "Quando": 2,
+    "Entao": 2,
+    "Então": 2,
+    "\\*": 2,
+    "'\\|": 3,
+  },
+  "editor.showUnused": true,
+  "editor.formatOnSave": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

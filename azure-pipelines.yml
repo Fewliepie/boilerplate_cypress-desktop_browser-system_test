@@ -1,0 +1,59 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  - master
+
+pool:
+  name: "Build-Linux"
+  demands: Agent.Name -equals $(AGENT_NAME)
+
+parameters:
+  - name: ambiente
+    displayName: "Escolha o Ambiente de Teste"
+    type: string
+    default: "sit"
+    values:
+      - "sit"
+      - "hlg"
+
+variables:
+  - group: servidor-build-testes
+  - name: projetoNome
+    value: "Template para Automação Web"
+  - name: tipoSistema
+    value: web
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: QA/azure-templates
+      ref: refs/heads/master
+
+stages:
+  - stage: RunTests
+    jobs:
+      - job: e2e
+        workspace:
+          clean: all
+        variables:
+          - group: ${{ parameters.ambiente }}
+        steps:
+          - bash: |
+              envFileName=".env.${{ parameters.ambiente }}"
+
+              echo "DB_SQL_TIPO=$(DB_SQL_TIPO)" >> $envFileName
+              echo "DB_SQL_SERVER=$(DB_SQL_SERVER)" >> $envFileName
+              echo "DB_SQL_USER=$(DB_SQL_USER)" >> $envFileName
+              echo "DB_SQL_PORT=$(DB_SQL_PORT)" >> $envFileName
+              echo "DB_SQL_PASSWORD='$(DB_SQL_PASSWORD)'" >> $envFileName
+            displayName: "Create the .env file"
+
+          - template: e2e-pipeline-template.yml@templates
+            parameters:
+              tipoSistema: $(tipoSistema)
+              projetoNome: $(projetoNome)
+              ambiente: ${{ parameters.ambiente }}

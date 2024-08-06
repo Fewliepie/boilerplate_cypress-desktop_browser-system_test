@@ -1,0 +1,43 @@
+{
+  "name": "boilerplate_cypress-desktop_browse-system_test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open:sit": "cypress open --config-file config-sit.js",
+    "cypress:open:hlg": "cypress open --config-file config-hlg.js",
+    "cypress:run:sit": "cypress run --config-file config-sit.js",
+    "cypress:run:hlg": "cypress run --config-file config-hlg.js",
+    "cypress:run:smoke:sit": "cypress run --env tags=@smoke --config-file config-sit.js",
+    "cypress:run:smoke:hlg": "cypress run --env tags=@smoke --config-file config-hlg.js",
+    "cypress:verify": "cypress verify",
+    "lint": "eslint \"./**/*.js\" --cache --cache-strategy content --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.6.6",
+    "@badeball/cypress-cucumber-preprocessor": "^20.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "mssql": "^10.0.2",
+    "pg": "^8.11.3",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^3.0.3",
+    "prettier-config-standard": "^7.0.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": [
+      "[filepath].js",
+      "cypress/steps/**/*.js"
+    ],
+    "html": {
+      "enabled": true
+    },
+    "filterSpecs": true,
+    "omitFiltered": true
+  }
+}
